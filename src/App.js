@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+const map=new Map([
+  [101, "John Doe"],
+  [102, "Jane Smith"],
+  [103, "Peter Johnson"]
+])
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(inputMap){
+  const sortedEntries=[...inputMap.entries()].sort((a,b)=>{
+    return a[1].localeCompare(b[1])
+  })
+
+  return new Map(sortedEntries);
+
 }
 
-export default App;
+const sortedMap=App(map)
+
+let output="Map:{ "
+sortedMap.forEach((value, key) => {
+  output+=` ${key}=${value}, `
+  
+});
+
+output=output.slice(0, -2)+ " }"
+
+console.log(output)
